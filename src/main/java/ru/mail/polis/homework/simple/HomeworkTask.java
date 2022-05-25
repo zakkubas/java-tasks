@@ -18,7 +18,23 @@ public class HomeworkTask {
      * выводим номер первой максимальной цифры (если их несколько)
      */
     public static byte maxNumber(long a) {
-        return 0;
+        a = Math.abs(a);
+        int digits = (byte) String.valueOf(a).length() + 1;  // cчитаем колличество цифр в числе
+        int last_digit = (int) (a % 10);  // последняя цифра
+        int max_digit = last_digit;  // принимаем последнию цифру за миксимвльную
+        int i = 1; // порядковый номер цифры
+        int count_max_digit = 1; // изначально считаем справа налево, при виводе результата сконвертируем
+        long n = a / 10;  // отбрасываем последнию цифру
+        while (n > 0) {
+            i++;
+            last_digit = (int) (n % 10);
+            if (last_digit >= max_digit) { // сравнием цифры с записанным значением
+                max_digit = last_digit;  // при необходимости перезаписываем значение
+                count_max_digit = i;
+            }
+            n = n / 10;
+        }
+        return (byte) ((byte) digits - count_max_digit);
     }
 
 
@@ -27,7 +43,9 @@ public class HomeworkTask {
      * которая находится на той же прямой что и первые две.
      */
     public static double lineFunction(int x1, int y1, int x2, int y2, int x3) {
-        return 0;
+        double y3;
+        y3 = (double) (x2 * y1 - x3 * y1 - x1 * y2 + x3 * y2) / (x2 - x1);
+        return y3;
     }
 
     /**
