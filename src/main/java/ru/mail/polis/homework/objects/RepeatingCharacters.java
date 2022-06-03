@@ -13,7 +13,25 @@ import java.util.Objects;
 public class RepeatingCharacters {
 
     public static Pair<Character, Integer> getMaxRepeatingCharacters(String str) {
-        return new Pair<>('s', 4);
+        if (str == null || str.isEmpty()) {
+            return null;
+        }
+
+        int charCount = 1;
+        int max = 1;
+        char maxChar = str.charAt(0); // изначально считаем, что первый символ в строке и есть максимально встречающийся
+        for (int i = 1; i < str.length(); i++) { // проходим по всем символам строки
+            if (str.charAt(i) == str.charAt(i - 1)) { // сравнием символ с предыдущем
+                charCount++; // если символ тот же, то увеличиваем счетчик
+                if (charCount > max) { // проверяем больше ли наш счетчик максимального значения
+                    max = charCount; // если больше запоминаем как максимальное значение
+                    maxChar = str.charAt(i); // и запоминаем символ с максимальным значением повторений
+                }
+            } else {
+                charCount = 1; // если символы не одинаковые, то сбрасываем счетчик
+            }
+        }
+        return new Pair<>(maxChar, max);
     }
 
     public static class Pair<T, V> {
